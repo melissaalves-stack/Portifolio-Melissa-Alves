@@ -1,212 +1,494 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Melissa Alves - Ciência da Computação & IA</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <!-- CSS principal -->
-    <link rel="stylesheet" href="style.css" />
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #fff5f8 0%, #ffe6f0 100%);
+            min-height: 100vh;
+        }
 
-    <!-- Título da página -->
-    <title>Portfólio - @Melissa Alves</title>
+        header {
+            background: linear-gradient(135deg, #ff9fbf 0%, #ffb3d9 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(255, 159, 191, 0.3);
+        }
 
-    <!-- Favicon do site -->
-    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon" />
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
 
-    <!-- Fontes Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Bitcount:wght@100..900&family=Sora:wght@100..800&display=swap"
-      rel="stylesheet"
-    />
+        .subtitle {
+            font-size: 1.3em;
+            opacity: 0.95;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
 
-    <!-- Bibliotecas de ícones -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
-  </head>
-  <body>
-    <!-- CABEÇALHO / NAVEGAÇÃO -->
+        .age-year {
+            font-size: 1em;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        nav {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        nav ul li {
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            color: #ff9fbf;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: #ffb3d9;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #ff9fbf;
+            transition: width 0.3s;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            background: white;
+            margin-bottom: 40px;
+            padding: 50px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        section h2 {
+            color: #ff9fbf;
+            margin-bottom: 25px;
+            font-size: 2.2em;
+            border-bottom: 4px solid #ff9fbf;
+            padding-bottom: 15px;
+            font-weight: 700;
+        }
+
+        section p {
+            font-size: 1.05em;
+            margin-bottom: 18px;
+            line-height: 2;
+            text-align: justify;
+            color: #34495e;
+        }
+
+        .highlight {
+            color: #ff9fbf;
+            font-weight: 600;
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #ff9fbf 0%, #ffb3d9 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 159, 191, 0.2);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(255, 159, 191, 0.4);
+        }
+
+        .card h3 {
+            font-size: 1.3em;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .card p {
+            font-size: 0.95em;
+            opacity: 0.95;
+            margin: 0;
+            text-align: center;
+        }
+
+        .quote {
+            background: #f8f9ff;
+            border-left: 5px solid #ff9fbf;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 5px;
+            font-style: italic;
+            color: #555;
+            font-size: 1.05em;
+        }
+
+        .book-item {
+            background: #f8f9ff;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 5px solid #ffb3d9;
+            transition: all 0.3s;
+        }
+
+        .book-item:hover {
+            box-shadow: 0 5px 15px rgba(255, 179, 217, 0.2);
+            transform: translateX(5px);
+        }
+
+        .book-item strong {
+            color: #ff9fbf;
+            font-size: 1.1em;
+        }
+
+        .book-item p {
+            margin: 0;
+            margin-top: 8px;
+            font-size: 0.95em;
+            color: #666;
+        }
+
+        .journey {
+            position: relative;
+            padding-left: 30px;
+            margin: 25px 0;
+        }
+
+        .journey::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .journey-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .journey-item:last-child {
+            border-bottom: none;
+        }
+
+        .journey-item strong {
+            color: #667eea;
+            font-size: 1.05em;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 14px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-top: 15px;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 1.05em;
+        }
+
+        .contact-link:hover {
+            color: #764ba2;
+            transform: translateY(-3px);
+        }
+
+        footer {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+
+        footer p {
+            margin: 8px 0;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            .subtitle {
+                font-size: 1em;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav ul li {
+                margin: 8px 0;
+            }
+
+            section {
+                padding: 30px 20px;
+            }
+
+            section h2 {
+                font-size: 1.6em;
+            }
+
+            section p {
+                text-align: left;
+            }
+
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
     <header>
-      <div class="container nav-wrapper">
-        <h1 class="logo">MEL<span class="realce">DEV</span></h1>
-
-        <!-- Menu mobile com checkbox -->
-        <input type="checkbox" id="menu-toggle" />
-        <label for="menu-toggle" class="menu-icon">&#9776;</label>
-
-        <nav class="navbar">
-          <a href="#sobre">Sobre</a>
-          <a href="#skills">Skills</a>
-          <a href="#projetos">Projetos</a>
-          <a href="#github">GitHub</a>
-          <a href="#contato">Contato</a>
-        </nav>
-      </div>
+        <h1>Melissa Alves</h1>
+        <p class="subtitle">Estudante de Ciência da Computação</p>
+        <p class="age-year">18 anos • Iniciante na jornada da IA</p>
     </header>
 
-    <!-- HERO - Sessão de boas-vindas com animação de texto -->
-    <section class="hero">
-      <div class="container hero-grid">
-        <div class="hero-img">
-          <img
-            src="https://avatars.githubusercontent.com/u/225098153?v=4"
-            alt="Foto de perfil"
-            class="profile-img"
-          />
-        </div>
-        <div class="hero-text">
-          <h2><span class="typed-text" id="typed"></span></h2>
-          <p>
-            Sou Melissa <!--TEXTO SOBRE MIM -->
-          </p>
-          <a href="#projetos" class="btn btn-primary">Ver meus projetos</a>
-        </div>
-      </div>
-    </section>
+    <nav>
+        <ul>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#jornada">Minha Jornada</a></li>
+            <li><a href="#interesses">Interesses</a></li>
+            <li><a href="#contato">Contato</a></li>
+        </ul>
+    </nav>
 
-    <!-- SOBRE MIM -->
-    <section id="sobre" class="section">
-      <div class="container about-text">
-        <h2 class="section-title">Sobre mim</h2>
-        <p class="section-text">
-          Sou desenvolvedor back-end com foco em desevolvimento de jogos locais e sistemas de aprendizado. Atuo com C, C++ Python e Git construindo soluções que equilibram
-          funcionalidade, usabilidade e identidade visual.
-        </p>
-        <p class="section-text">
-          Sou estudante da Unifal (Universidade Federal de Alfenas), atualmente 
-          estou no segundo periodo da faculdade, tenho experiencia com linguagem 
-          C e C++ para desenvolvimento de programas. 
-        </p>
-        <p class="section-text">
-          Continuo estudando e evoluindo nos meus projetos paralelos, sempre
-          buscando aprender mais e compartilhar o que sei de forma simples e
-          prática.
-        </p>
-      </div>
-    </section>
-
-    <!-- HABILIDADES / STACKS (Cards) -->
-    <section id="skills" class="section">
-      <div class="container">
-        <h2>Skills</h2>
-        <div class="skills-grid">
-          <div class="skill-card">
-            <i class="devicon-html5-plain colored"></i>
-            <span>HTML5</span>
-          </div>
-          <div class="skill-card">
-            <i class="devicon-css3-plain colored"></i>
-            <span>CSS3</span>
-          </div>
-          <div class="skill-card">
-            <i class="devicon-cplusplus-plain colored"></i>
-            <span>C++</span>
-          </div>
-          <div class="skill-card">
-            <i class="devicon-python-plain colored"></i>
-            <span>Python</span>
-          </div>
-          <div class="skill-card">
-            <i class="devicon-github-original"></i>
-            <span>GitHub</span>
-          </div>
-          <div class="skill-card">
-            <i class="devicon-c-plain colored"></i>
-            <span>C</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PROJETOS -->
-    <section id="projetos" class="section">
-      <div class="container">
-        <h2>Projetos</h2>
-        <div class="projetos-grid">
-          <div class="projeto-card">
-            <h3>Imobiliaria</h3>
+    <div class="container">
+        <section id="sobre">
+            <h2>Olá! 👋</h2>
             <p>
-              Desenvolvimento do backend em C++ de um sistema leitor de arquivos para uma imobiliária local, 
-              com o objetivo de processar, armazenar e organizar informações referentes a imóveis disponíveis.
+                Bem-vindo ao meu espaço pessoal. Meu nome é <span class="highlight">Melissa</span> e estou no primeiro ano 
+                de <span class="highlight">Ciência da Computação</span>. Ainda sou iniciante nesse universo fascinante da 
+                tecnologia, mas carrego comigo uma curiosidade genuína e uma determinação de explorar tudo o que essa área 
+                tem a oferecer.
             </p>
-            <div class="btns">
-              <a href="https://github.com/aredesog/AEDs-1/blob/main/Projeto1.cpp">Ver projeto</a>
-            </div>
-          </div>
-
-          <div class="projeto-card">
-            <h3>Jogo do Pacman</h3>
             <p>
-              Desenvolvimento do backend de uma réplica do clássico jogo Pac-Man, utilizando 
-              caracteres especiais para a construção e exibição dos elementos visuais do jogo.
+                Sou alguém que acredita que a vida é feita de pequenos equilibrios: entre aprender e desaprender, entre 
+                estar conectado e desconectado, entre crescimento profissional e bem-estar pessoal. Este site é um reflexo 
+                dessa filosofia – um lugar onde compartilho meus pensamentos, descobertas e a jornada que estou construindo.
             </p>
-            <div class="btns">
-              <a href="https://github.com/aredesog/linguagem-C/blob/main/pacman.c">Ver projeto</a>
+            <div class="quote">
+                "Eu gosto de como as pessoas podem dizer tantas coisas apenas permanecendo quietas." – Jenny Han
             </div>
-          </div>
+        </section>
 
-          <div class="projeto-card">
-            <h3>Projeto Imagem</h3>
+        <section id="jornada">
+            <h2>Minha Jornada Acadêmica</h2>
             <p>
-              manipulação de matrizes (imagens) utilizando ponteiros em C/C++, implementando 
-              funcionalidades para processar imagens em tons de cinza a partir de arquivos-texto no formato PGM.
+                Este ano marca o início de uma nova capítulo na minha vida. Decidi mergulhar no universo da 
+                <span class="highlight">Ciência da Computação</span> porque acredito que tecnologia é uma das forças mais 
+                transformadoras do nosso tempo. E não é qualquer aspecto da tecnologia que me fascina – é especificamente 
+                o potencial da <span class="highlight">Inteligência Artificial</span>.
             </p>
-            <div class="btns">
-              <a href="https://github.com/aredesog/AEDs-1/blob/main/Projeto2.cpp">Ver projeto</a>
+
+            <div class="journey">
+                <div class="journey-item">
+                    <strong>📚 Meu Interesse em Machine Learning</strong>
+                    <p>
+                        Machine Learning representa para mim a possibilidade de criar sistemas que aprendem, adaptam e evoluem. 
+                        Gosto de pensar em como algoritmos podem reconhecer padrões que nossos olhos humanos perdem, como modelos 
+                        podem ser treinados para resolver problemas complexos. É uma área que combina lógica, criatividade e 
+                        responsabilidade – e é exatamente isso que me atrai.
+                    </p>
+                </div>
+
+                <div class="journey-item">
+                    <strong>🔬 Construindo a Base</strong>
+                    <p>
+                        Estou aproveitando meus primeiros semestres para consolidar os fundamentos: programação, matemática, 
+                        estrutura de dados. Acredito que uma boa base é essencial para explorar com profundidade as complexidades 
+                        da IA no futuro.
+                    </p>
+                </div>
+
+                <div class="journey-item">
+                    <strong>💡 Buscando Ideias</strong>
+                    <p>
+                        Ainda não tenho projetos específicos em mente, mas estou aberta a explorar diferentes áreas. Cada 
+                        disciplina, cada conceito aprendido é uma semente para potenciais ideias futuras. A jornada é tão 
+                        importante quanto o destino.
+                    </p>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
+        </section>
 
-    <!-- CONTATO -->
-    <section id="contato" class="section">
-      <div class="container contato-card">
-        <h2>Contato</h2>
-        <p>Me chama no LinkedIn ou manda um e-mail para contato! </p>
-        <div class="social-links">
-          <a href="https://github.com/melissaalves-stack" class="btn-social">
-            <i class="devicon-github-original"></i> GitHub
-          </a>
-          <a href="www.linkedin.com/in/melissa-hollanda-de-oliveira-alves-86897a38b" class="btn-social">
-            <i class="fab fa-linkedin"></i> LinkedIn
-          </a>
-          <a href="guiaredes19@gmail.com" class="btn-social">
-            <i class="fas fa-envelope"></i> E-mail
-          </a>
-        </div>
-      </div>
-    </section>
+        <section id="interesses">
+            <h2>Para Além do Código</h2>
+            <p>
+                Acredito que ser um bom desenvolvedor não é apenas sobre dominar linguagens de programação. É sobre ser uma 
+                pessoa completa – alguém que cuida da mente, do corpo e da alma.
+            </p>
 
-    <!-- RODAPÉ -->
+            <div class="cards-container">
+                <div class="card">
+                    <h3>💪 Academia</h3>
+                    <p>Meu espaço de paz e força. A academia é onde desacelero, limpo minha mente e recarrego as energias.</p>
+                </div>
+                <div class="card">
+                    <h3>📖 Leitura</h3>
+                    <p>Histórias que alimentam a mente com boas ideias e perspectivas. Cada livro é uma conversa silenciosa.</p>
+                </div>
+                <div class="card">
+                    <h3>📸 Fotografia</h3>
+                    <p>Capturo momentos através da lente no VSCO. Acredito na qualidade sobre quantidade.</p>
+                </div>
+            </div>
+
+            <h3 style="color: #667eea; margin-top: 40px; margin-bottom: 20px; font-size: 1.5em;">Livros que me Marcaram 💭</h3>
+            
+            <div class="book-item">
+                <strong>"O Que Você Só Vê Quando Desacelera" – Tobias Källenius</strong>
+                <p>
+                    Este livro mudou minha forma de enxergar o tempo. Aprendi que desacelerar não é fraqueza – é sabedoria. 
+                    Em um mundo onde tudo corre tão rápido, às vezes precisamos parar para realmente ver. Essa lição ressoa 
+                    especialmente em minha vida acadêmica: melhor aprender bem e devagar do que correrrápido sem compreender.
+                </p>
+            </div>
+
+            <div class="book-item">
+                <strong>"Para Todos os Garotos Que Já Amei" – Jenny Han</strong>
+                <p>
+                    Sim, é um romance! E não me arrependo. Gosto de histórias que celebram vulnerabilidade, crescimento e 
+                    aqueles momentos clichê que, na verdade, definem nossas vidas. Além disso, adoro como o livro retrata 
+                    a dificuldade de se comunicar e como às vezes temos que nos aproximar mesmo quando temos medo.
+                </p>
+            </div>
+
+            <p style="margin-top: 25px;">
+                Essas leituras não são apenas entretenimento – são filosofias que carrego comigo. Elas me lembram que mesmo 
+                em um futuro dominado por IA e tecnologia, a humanidade, a empatia e a beleza das conexões humanas permanecem 
+                irrefutavelmente importantes.
+            </p>
+        </section>
+
+        <section id="contato">
+            <h2>Vamos Conectar? 🤝</h2>
+            <p style="text-align: center;">
+                Estou sempre aberta a conversas sobre tecnologia, ideias, recomendações de livros ou até mesmo para 
+                compartilhar uma boa sessão de academia. Você pode me encontrar nos seguintes lugares:
+            </p>
+
+            <div class="contact-links">
+                <a href="https://github.com/melissaalves-stack" class="contact-link" target="_blank">
+                    🐙 GitHub
+                </a>
+                <a href="https://vsco.co/itsmelalvs" class="contact-link" target="_blank">
+                    📸 VSCO
+                </a>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <p style="font-size: 0.95em; color: #999;">
+                    Dica: Se você quer conversar, o melhor jeito é através do GitHub ou email! Sou alguém que valoriza 
+                    conversas profundas, então prefiro plataformas que permitam trocas significativas.
+                </p>
+            </div>
+        </section>
+    </div>
+
     <footer>
-      <p>
-       Melissa Hollanda
-      </p>
+        <p>&copy; 2025 Melissa Alves | Ciência da Computação</p>
+        <p>Desenvolvido com HTML, CSS e muita ☕ e 💭</p>
     </footer>
-
-    <!-- SCRIPT: Animação Hello World na Hero -->
-    <script>
-      const text = "Hello, World!";
-      const typedEl = document.getElementById("typed");
-
-      let i = 0;
-      function digitar() {
-        if (i < text.length) {
-          typedEl.innerHTML += text.charAt(i);
-          i++;
-          setTimeout(digitar, 120);
-        }
-      }
-
-      window.addEventListener("DOMContentLoaded", digitar);
-    </script>
-  </body>
+</body>
 </html>
