@@ -94,7 +94,7 @@ Estou no início da minha trajetória em Ciência da Computação, focando em:
 Estou sempre aberta a conversas sobre tecnologia, ideias, recomendações de livros ou até mesmo para compartilhar uma boa sessão de academia!
 
 - **GitHub:** [melissaalves-stack](https://github.com/melissaalves-stack)
-- **Email:** seu-email@exemplo.com
+- **Email:** melissa.alves@sou.unifal-mg.edu.br
 
 > **Dica:** Se você quer conversar, o melhor jeito é através do GitHub ou email! Valorizo conversas profundas e trocas significativas.
 
@@ -106,6 +106,6 @@ Este projeto está sob a licença MIT. Sinta-se livre para explorar e se inspira
 
 ---
 
-**Feito com 💜 por Melissa Alves**
+**Feito com 🩷 por Melissa Alves**
 
 *"A jornada é tão importante quanto o destino"*
