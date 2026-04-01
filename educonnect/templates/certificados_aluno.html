@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aluno - EduConnect</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  
+  <style>
+    .lista-certificados {
+      list-style-type: none;
+      padding: 0;
+    }
+    .lista-certificados li {
+      background-color: #1a1a1a;
+      border: 1px solid #1a1b33;
+      padding: 15px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 5px;
+    }
+    .lista-certificados span {
+      font-size: 1.1em;
+      font-weight: bold;
+    }
+    /* Estilo básico para o botão, caso você não tenha 'btn' no seu CSS */
+    .btn {
+      padding: 8px 12px;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="sidebar">
+    <h2>EduConnect</h2>
+    <a href="{{ url_for('painel_aluno') }}">Dashboard</a> <a href="{{ url_for('cursos_aluno') }}">Cursos</a>
+    <a href="{{ url_for('certificados_aluno') }}" class="active">Certificados</a>
+    <a href="{{ url_for('logout') }}">Sair</a>
+  </div>
+
+  <div class="main-content">
+    <h1>Certificados</h1>
+    <p>Abaixo estão os cursos em que você está matriculado. Clique para gerar seu certificado (Mock).</p>
+    
+    {% if cursos %}
+      <ul class="lista-certificados">
+        
+
+        {% for curso in cursos %}
+          <li>
+            <span>{{ curso.titulo }}</span>
+            <a href="{{ url_for('gerar_certificado', curso_id=curso.id) }}" class="btn" target="_blank">
+              Gerar Certificado (PDF)
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>Você ainda não está matriculado em nenhum curso.</p>
+    {% endif %}
+    
+  </div>  
+  <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestor - EduConnect</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="sidebar">
+    <h2>EduConnect</h2>
+    <a href="#" class="active">Relatórios</a>
+    <a href="{{ url_for('cursos_professor') }}">Cursos</a>
+    <a href="#">Usuários</a>
+    <a href="{{ url_for('logout') }}">Sair</a>
+  </div>
+
+  <dialog class="modal-janela" id="adicionarQuestaoModal">
+    <button class="boton-elegante" id="fecharModalQuestaoBtn">&times;</button>
+    <h2>Adicionar Questão</h2>
+    <h1>Adicionar Questão - {{ atividade.titulo }}</h1>
+
+    <form action="{{ url_for('adicionar_questao', atividade_id=atividade.id) }}" method="POST">
+        <div>
+            <label for="enunciado">Enunciado da questão:</label>
+        </div>
+        <div class="textarea">  
+        <textarea id="enunciado" name="enunciado" rows="4" required></textarea>
+        </div>
+        <div class="alternativa-group">
+        <span class="alternativa-label">a)</span>
+        <input type="text" id="alternativa_a" name="alternativa_a" placeholder="Digite a alternativa A">
+        </div>
+
+        <div class="alternativa-group">
+        <span class="alternativa-label">b)</span>
+        <input type="text" id="alternativa_b" name="alternativa_b" placeholder="Digite a alternativa B">
+        </div>
+        
+        <div class="alternativa-group">
+        <span class="alternativa-label">c)</span>
+        <input type="text" id="alternativa_c" name="alternativa_c" placeholder="Digite a alternativa C">
+        </div>
+        
+        <div class="alternativa-group">
+        <span class="alternativa-label">d)</span>
+        <input type="text" id="alternativa_d" name="alternativa_d" placeholder="Digite a alternativa D">
+        </div>
+
+        <div class="alternativa-group">
+        <span class="alternativa-label">e)</span>
+
+      <input type="text" id="alternativa_e" name="alternativa_e" placeholder="Digite a alternativa E">
+    </div>
+      <label for="resposta_correta">Resposta correta:</label>
+      <select id="resposta_correta" name="resposta_correta" required>
+        <option value="">Selecione...</option>
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+        <option value="D">D</option>
+        <option value="E">E</option>
+      </select>
+      
+      <button class="boton-elegante" type="submit">Adicionar Questão</button>
+    </form>
+  </dialog>
+
+
+  <dialog class="modal-janela" id="submissoesModal">
+    <button class="boton-elegante" id="fecharModalSubmissoesBtn">&times;</button>
+    <h1>Submissões - {{ atividade.titulo }}</h1>
+    {% if submissoes %}
+      <ul>
+        {% for s in submissoes %}
+          <li>
+            Aluno: {{ s.aluno.nome }} — Nota: {{ s.nota }} — Enviado em: {{ s.enviada_em.strftime('%d/%m/%Y %H:%M') }}
+            <!-- Mantém href para fallback e adiciona data-url para fetch -->
+            <a 
+              class="boton-elegante abrirDetalheSubmissao" 
+              href="{{ url_for('professor_ver_submissao', submissao_id=s.id) }}"
+              data-url="{{ url_for('professor_ver_submissao', submissao_id=s.id) }}"
+            >
+              Ver detalhes
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>Nenhuma submissão ainda.</p>
+    {% endif %}
+  </dialog>
+
+  <dialog class="modal-janela" id="detalheSubmissaoModal">
+    <button class="boton-elegante" id="fecharModalDetalheBtn">&times;</button>
+    <div id="detalheSubmissaoConteudo">
+      <!-- O HTML da rota professor_ver_submissao será injetado aqui -->
+    </div>
+  </dialog>
+
+  <div class="main-content">
+    <h1>{{ atividade.titulo }} - Questões</h1>
+
+  <button class="boton-elegante" id="abrirModalQuestaoBtn">
+    Adicionar Nova Questão
+  </button>
+
+  {% if questoes %}
+    <button class="boton-elegante" id="abrirModalSubmissoesBtn">
+    Ver respostas dos alunos
+    </button>
+
+    {% for q in questoes %}
+      <div class="questao-card">
+        <h3>Questão {{ loop.index }}</h3>
+        <p><strong>{{ q.enunciado }}</strong></p>
+        <ul>
+          {% if q.alternativa_a %}<li>A) {{ q.alternativa_a }}</li>{% endif %}
+          {% if q.alternativa_b %}<li>B) {{ q.alternativa_b }}</li>{% endif %}
+          {% if q.alternativa_c %}<li>C) {{ q.alternativa_c }}</li>{% endif %}
+          {% if q.alternativa_d %}<li>D) {{ q.alternativa_d }}</li>{% endif %}
+          {% if q.alternativa_e %}<li>E) {{ q.alternativa_e }}</li>{% endif %}
+        </ul>
+        <p><strong>Resposta correta:</strong> {{ q.resposta_correta }}</p>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>Nenhuma questão adicionada ainda.</p>
+  {% endif %}
+  
+  <p><a href="{{ url_for('atividades_curso_professor', curso_id=atividade.curso.id) }}">Voltar</a></p>
+
+  </div>
+  <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+  <script>
+    const modal = document.getElementById('adicionarQuestaoModal');
+    const abrirModalBtn = document.getElementById('abrirModalQuestaoBtn');
+    const fecharModalBtn = document.getElementById('fecharModalQuestaoBtn');
+
+    abrirModalBtn.addEventListener('click', () => {
+      modal.showModal();
+    });
+
+    fecharModalBtn.addEventListener('click', () => {
+      modal.close();
+    });
+
+    // Modal de Submissões
+    const submissoesModal = document.getElementById('submissoesModal');
+    const abrirModalSubmissoesBtn = document.getElementById('abrirModalSubmissoesBtn');
+    const fecharModalSubmissoesBtn = document.getElementById('fecharModalSubmissoesBtn');
+
+    abrirModalSubmissoesBtn.addEventListener('click', () => submissoesModal.showModal());
+    fecharModalSubmissoesBtn.addEventListener('click', () => submissoesModal.close());
+
+    // NOVO: Modal de Detalhe da Submissão
+    const detalheModal = document.getElementById('detalheSubmissaoModal');
+    const fecharDetalheBtn = document.getElementById('fecharModalDetalheBtn');
+    const detalheConteudo = document.getElementById('detalheSubmissaoConteudo');
+
+    // Delegação: intercepta os cliques em "Ver detalhes" dentro do modal de submissões
+    submissoesModal.addEventListener('click', async (e) => {
+      const link = e.target.closest('.abrirDetalheSubmissao');
+      if (!link) return;
+
+      // Evita navegação e carrega o HTML da rota
+      e.preventDefault();
+      const url = link.dataset.url;
+
+      try {
+        const resp = await fetch(url, { headers: { 'X-Requested-With': 'XMLHttpRequest' }});
+        const html = await resp.text();
+
+        // Extrai somente o conteúdo do <body> para injetar no modal
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        detalheConteudo.innerHTML = doc.body ? doc.body.innerHTML : html;
+
+        detalheModal.showModal();
+      } catch (err) {
+        console.error('Erro ao carregar submissão:', err);
+        alert('Não foi possível carregar os detalhes da submissão.');
+      }
+    });
+
+    fecharDetalheBtn.addEventListener('click', () => detalheModal.close());
+  </script>
+</body>
+</html>

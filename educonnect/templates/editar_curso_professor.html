@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestor - EduConnect</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="sidebar">
+    <h2>EduConnect</h2>
+    <a href="#" class="active">Relatórios</a>
+    <a href="{{ url_for('cursos_professor') }}">Cursos</a>
+    <a href="#">Usuários</a>
+    <a href="{{ url_for('logout') }}">Sair</a>
+  </div>
+
+  
+  <dialog class="modal-janela" id="modalAdicionarAtividade">
+    <button class="boton-elegante" id="fecharModalBtn">&times;</button>
+    </button>
+    <h2>Adicionar Atividade</h2>
+    <form action="{{ url_for('editar_curso_professor', curso_id=curso.id) }}" method="POST">
+      <div class="form-group">
+        <label  for="titulo">Título da Atividade:</label>
+        <input class="label-x" type="text" id="titulo" name="titulo" required>
+      </div>
+      <div class="form-group">
+        <label  for="descricao">Descrição da Atividade:</label>
+        <textarea class="label-x" id="descricao" name="descricao" required></textarea>
+      </div>
+      <div class="form-group">
+        <label  for="tipo">Tipo de Atividade:</label>
+        <select class="label-x" id="tipo" name="tipo" required>
+          <option value="prova">Prova</option>
+          <option value="atividade">Atividade</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label  for="data_entrega">Data de Entrega:</label>
+        <input class="label-x" type="date" id="data_entrega" name="data_entrega" required>
+      </div>
+      <button class="boton-elegante" type="submit">Adicionar Atividade</button>
+    </form>
+  </dialog>
+
+  <dialog class="modal-janela" id="modalAdicionarAula">
+    <button class="boton-elegante" id="fecharModalAulaBtn">&times;</button>
+    <h2>Adicionar Nova Aula</h2>
+    <!-- O formulário DEVE ter enctype="multipart/form-data" para uploads -->
+    <form action="{{ url_for('adicionar_aula', curso_id=curso.id) }}" method="POST" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="titulo_aula">Título da Aula:</label>
+        <input class="label-x" type="text" id="titulo_aula" name="titulo_aula" required>
+      </div>
+      <div class="form-group">
+        <label for="descricao_aula">Descrição da Aula:</label>
+        <textarea class="label-x" id="descricao_aula" name="descricao_aula"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="video_aula">Arquivo de Vídeo:</label>
+        <input class="label-x" type="file" id="video_aula" name="video_aula" accept="video/*" required>
+      </div>
+      <button class="boton-elegante" type="submit">Adicionar Aula</button>
+    </form>
+  </dialog>
+
+
+  <div class="main-content">
+    <h1>{{ curso.titulo }}</h1>
+    
+    <!-- Seção de Aulas -->
+    <div class="section-container">
+      <h3>Aulas do Curso</h3>
+      <button class="boton-elegante" id="abrirModalAulaBtn">Adicionar Aula</button>
+      <ul>
+        {% for aula in curso.aulas %}
+        <div class="card">
+          <h4>{{ aula.titulo }}</h4>
+          <p>{{ aula.descricao }}</p>
+          <!-- Link para o vídeo salvo -->
+          <a href="{{ url_for('static', filename='uploads/videos/' + aula.video_filename) }}" target="_blank">Assistir Vídeo</a>
+        </div>
+        {% else %}
+        <p>Nenhuma aula adicionada ainda.</p>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <!-- Seção de Atividades -->
+    <div class="section-container">
+      <h3>Atividades</h3>
+      <button class="boton-elegante" id="abrirModalBtn">Adicionar Atividade</button>
+      <ul>
+        {% for atividade in curso.atividades %}
+        <div class="card">
+          <h4>{{ atividade.titulo }}</h4>
+          <p>{{ atividade.descricao }}</p>
+          <p>Tipo: {{ atividade.tipo }}</p>
+          <p>Data de Entrega: {{ atividade.data_entrega.strftime('%d/%m/%Y') }}</p>
+          <a href="{{ url_for('gerenciar_questoes', atividade_id=atividade.id) }}" class="boton-elegante">Adicionar/Ver Questões</a>
+        </div>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+
+  <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+  <script>
+    const modalAtividade = document.getElementById('modalAdicionarAtividade');
+    const abrirModalAtividadeBtn = document.getElementById('abrirModalBtn');
+    const fecharModalAtividadeBtn = document.getElementById('fecharModalBtn');
+    abrirModalAtividadeBtn.addEventListener('click', () => modalAtividade.showModal());
+    fecharModalAtividadeBtn.addEventListener('click', () => modalAtividade.close());
+
+    // ### NOVO SCRIPT PARA MODAL DE AULA ###
+    const modalAula = document.getElementById('modalAdicionarAula');
+    const abrirModalAulaBtn = document.getElementById('abrirModalAulaBtn');
+    const fecharModalAulaBtn = document.getElementById('fecharModalAulaBtn');
+    abrirModalAulaBtn.addEventListener('click', () => modalAula.showModal());
+    fecharModalAulaBtn.addEventListener('click', () => modalAula.close());
+  </script>
+</body>
+</html>

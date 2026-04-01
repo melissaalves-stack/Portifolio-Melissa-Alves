@@ -1,0 +1,19 @@
+<div class="submissao-detalhe" style="padding: 20px;">
+  <h1>Submissão de {{ submissao.aluno.nome }} — Nota: {{ submissao.nota }}</h1>
+  <p>Enviado em: {{ submissao.enviada_em.strftime('%d/%m/%Y %H:%M') }}</p>
+  
+  {% for r, q in respostas %}
+    <div class="questao-card">
+      <p><strong>{{ loop.index }}. {{ q.enunciado }}</strong></p>
+      <p>
+        Resposta do aluno: <strong>{{ r.alternativa }}</strong> — 
+        {% if r.correta %}
+          <span style="color: green;">✓ Correta</span>
+        {% else %}
+          <span style="color: red;">✗ Incorreta</span>
+        {% endif %}
+      </p>
+      <p>Gabarito: <strong>{{ q.resposta_correta }}</strong></p>
+    </div>
+  {% endfor %}
+</div>

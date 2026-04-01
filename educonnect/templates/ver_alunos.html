@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestor - EduConnect</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="sidebar">
+    <h2>EduConnect</h2>
+    <a href="#" class="active">Relatórios</a>
+    <a href="{{ url_for('cursos_gestor') }}">Cursos</a>
+    <a href="#">Usuários</a>
+    <a href="{{ url_for('logout') }}">Sair</a>
+  </div>
+
+  <div class="main-content">
+    <h1>Professor Responsável:</h1>
+    <div class="aluno-card">
+        {% if curso.professor %}
+        <h2>{{ curso.professor.nome }}</h2>
+        <p>Email: {{ curso.professor.email }}</p>
+        {% else %}
+        <h2>Sem professor atribuído</h2>
+        {% endif %}
+    </div>
+    <h1>Alunos do Curso: {{ curso.titulo }}</h1>
+    <div class="alunos-list">
+      {% for aluno in alunos %}
+      <div class="aluno-card">
+        <h3>{{ aluno.nome }}</h3>
+        <p>Email: {{ aluno.email }}</p>
+        <p>Data de Matrícula: {{ aluno.data_matricula }}</p>
+        <p class="subtitulo">Aluno</p>
+        <form action="{{ url_for('desmatricular_aluno', curso_id=curso.id, aluno_id=aluno.id) }}" method="POST" style="display:inline;">
+          <button class="boton-elegante" type="submit">Desmatricular</button>
+        </form>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+</body>
+</html>

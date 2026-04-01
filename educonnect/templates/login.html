@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - EduConnect</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="login-body">
+  <div class="login-container">
+    <h1>EduConnect</h1>
+    <h2>Login</h2>
+    <form action="/login" method="POST">
+
+      <label>Email:</label>
+      <input type="email" name="email" required>
+
+      <label>Senha:</label>
+      <input type="password" name="senha" required>
+
+      <button type="submit">Entrar</button>
+    </form>
+    <p>Não possui conta? <a href="{{ url_for('cadastro') }}">Cadastrar</a></p>
+  </div>
+  <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+</body>
+</html>

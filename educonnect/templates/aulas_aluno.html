@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestor - EduConnect</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="sidebar">
+    <h2>EduConnect</h2>
+    <a href="{{ url_for('painel_aluno') }}" class="active">Dashboard</a>
+    <a href="{{ url_for('cursos_aluno') }}">Cursos</a>
+    <a href="{{ url_for('certificados_aluno') }}">Certificados</a>
+    <a href="{{ url_for('logout') }}">Sair</a>
+  </div>
+  <div class="main-content">
+    <div class="header-com-botao">
+        <h1>{{ curso.titulo }} — Aulas</h1>
+        <a href="{{ url_for('atividades_aluno', curso_id=curso.id) }}" class="boton-elegante">Ver Atividades</a>
+    </div>
+
+    {% if aulas %}
+      <div class="aulas-grid">
+        {% for aula in aulas %}
+          <div class="cursos-card aula-card">
+            <h3>{{ aula.titulo }}</h3>
+            <p>{{ aula.descricao or 'Sem descrição.' }}</p>
+            {% if aula.video_filename %}
+              <video width="100%" controls>
+                <source src="{{ url_for('serve_file', filename=aula.video_filename) }}" type="video/mp4">
+                Seu navegador não suporta o player de vídeo.
+              </video>
+            {% else %}
+              <p><i>Vídeo não disponível.</i></p>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>Nenhuma aula foi publicada para este curso ainda.</p>
+    {% endif %}
+
+    <p style="margin-top: 20px;"><a href="{{ url_for('cursos_aluno') }}">Voltar para Meus Cursos</a></p>
+  </div>
+  <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+</body>
+</html>
