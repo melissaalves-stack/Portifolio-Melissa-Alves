@@ -1,0 +1,274 @@
+body {
+  display: flex;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  background-color: #0d1117;
+  color: #fff;
+}
+
+.sidebar {
+  width: 220px;
+  background-color: #161b22;
+  height: 100vh;
+  position: fixed;
+  padding: 20px;
+}
+
+.sidebar h2 {
+  color: #58a6ff;
+}
+
+.sidebar a {
+  display: block;
+  color: #ccc;
+  padding: 10px 0;
+  text-decoration: none;
+}
+
+.sidebar a.active,
+.sidebar a:hover {
+  color: #58a6ff;
+}
+
+.main-content {
+  top: 0;
+  bottom: 0;
+  margin-left: 240px;
+  padding: 30px;
+}
+
+.main-content-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin-left: 240px;
+  padding: 30px;
+}
+
+.main-content-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  margin-left: 240px;
+  padding: 30px;
+}
+
+.card {
+  background-color: #1c2128;
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.cursos-grid {
+  display: grid ;
+  margin-left: 15px;
+  margin-right: 15px;
+  grid-template-columns: repeat(6, 250px);
+  gap: 20px;
+}
+
+.cursos-card {
+  background-color:#161b22;
+  display: block;
+  border: 2px solid #405063;
+  text-align: left;
+  text-decoration: aliceblue;
+  padding: 25px 20px;
+  border-radius: 12px;
+}
+
+.modal-overlay {
+  /* Começa escondido */
+  display: none; 
+
+  /* Fica fixo na tela */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  /* Fundo preto semi-transparente */
+  background-color: rgba(0, 0, 0, 0.7);
+
+  /* Fica na frente de TUDO */
+  z-index: 1000;
+
+  /* Centraliza a janela modal (o filho) */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-janela {
+  background-color: #1c2128;
+  color: rgb(57, 119, 173);
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  width: 80%;
+  max-width: 500px; /* Limite de largura */
+  position: relative; /* Para posicionar o botão de fechar */
+}
+
+.label-x{
+  background-color: aliceblue;
+  border: 1px solid #3d77b9;
+  border-radius: 8px;
+}
+
+textarea {
+  width: 100%;
+  min-height: 150px; /* ou height: 100% se a div pai tiver altura definida */
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: inherit;
+  resize: vertical; /* Permite redimensionar apenas verticalmente */
+  box-sizing: border-box; /* Inclui padding e border no cálculo da largura */
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.3);
+}
+
+/* Grupo de alternativa com label à esquerda */
+.alternativa-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.alternativa-label {
+  font-weight: bold;
+  font-size: 16px;
+  min-width: 30px;
+  color: #333;
+}
+
+.alternativa-group input[type="text"] {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.alternativa-group input[type="text"]:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.3);
+}
+
+.modal-fechar {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.modal-overlay.visivel {
+  display: flex;
+}
+
+.actions button {
+  margin-right: 10px;
+}
+
+.btn-primary {
+  background-color: #58a6ff;
+  border: none;
+  padding: 10px 15px;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.login-body {
+  background-color: #0d1117;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-container {
+  background-color: #161b22;
+  padding: 40px;
+  border-radius: 12px;
+  text-align: center;
+  width: 300px;
+}
+
+.login-container input, select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  border: none;
+}
+
+.login-container button {
+  background-color: #58a6ff;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.subtitle {
+  color: #8b949e;
+  margin-bottom: 20px;
+}
+
+/* From Uiverse.io by iZOXVL */ 
+.boton-elegante {
+  padding: 6px 10px;
+  border: 2px solid #1a1b33;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  font-size: 0.8rem;
+  cursor: pointer;
+  border-radius: 20px;
+  transition: all 0.4s ease;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+  font-weight: bold;
+}
+
+.boton-elegante::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.25) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  transform: scale(0);
+  transition: transform 0.5s ease;
+}
+
+.boton-elegante:hover::after {
+  transform: scale(4);
+}
+
+.boton-elegante:hover {
+  border-color: #666666;
+  background: #292929;
+}

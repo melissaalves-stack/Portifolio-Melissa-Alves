@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestor - EduConnect</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="sidebar">
+    <h2>EduConnect</h2>
+    <a href="{{ url_for('painel_aluno') }}" class="active">Dashboard</a>
+    <a href="{{ url_for('cursos_aluno') }}">Cursos</a>
+    <a href="{{ url_for('certificados_aluno') }}">Certificados</a>
+    <a href="{{ url_for('logout') }}">Sair</a>
+  </div>
+  <div class="main-content">
+    <div class="main-content-top">
+        <h2>Meus Cursos</h2>
+        <div class="cursos-grid">
+        {% for curso in current_user.cursos_matriculados %}
+            <div class="cursos-card">
+            <h2>{{ curso.titulo }}</h2>
+            <p>{{ curso.descricao }}</p>
+            <div style="display: grid;">
+            <form method="POST" action="{{ url_for('desmatricular_aluno', curso_id=curso.id) }}">
+                <button class="boton-elegante" type="submit">Desmatricular</button>
+            </form>
+            <a class="boton-elegante" href="{{ url_for('atividades_aluno', curso_id=curso.id) }}">
+            Ver Atividades
+            </a>
+            <a class="boton-elegante" href="{{ url_for('aulas_aluno', curso_id=curso.id) }}">
+            aulas
+            </a>
+            </div>
+        </div>
+        {% else %}
+            <p>Você ainda não está matriculado em nenhum curso.</p>
+        {% endfor %}
+        </div> 
+    </div> 
+    <div class="main-content-bottom">
+        <h2>Cursos Disponíveis</h2>
+        <div class="cursos-grid">
+            {% for curso in cursos_disponiveis %}
+                <div class="cursos-card">
+                <h3>{{ curso.titulo }}</h3>
+                <p>{{ curso.descricao }}</p>
+                <form method="POST" action="{{ url_for('matricular_aluno', curso_id=curso.id) }}">
+                    <button class="boton-elegante" type="submit">Matricular-se</button>
+                </form>
+                </div>
+            {% else %}
+                <p>Nenhum curso disponível no momento.</p>
+            {% endfor %}
+        </div>   
+    </div>
+  </div>
+  <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+</body>
+</html>

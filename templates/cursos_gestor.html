@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestor - EduConnect</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="sidebar">
+    <h2>EduConnect</h2>
+    <a href="#" class="active">Relatórios</a>
+    <a href="{{ url_for('cursos_gestor') }}">Cursos</a>
+    <a href="#">Usuários</a>
+    <a href="{{ url_for('logout') }}">Sair</a>
+  </div>
+
+  <div class="main-content">
+    <form action="{{ url_for('criar_curso') }}" method="GET">
+      <button class="btn-primary">+ Criar novo curso</button>
+    </form>
+      <h3>Gerenciar Cursos</h3>
+      <div class="cursos-grid">
+        {% if cursos %}
+        {% for curso in cursos %}
+        <div class="cursos-card">
+          <h2>{{ curso.titulo }}</h2>
+          <p>{{ curso.professor.nome if curso.professor else 'Sem professor' }}</p>
+          <p>{{ curso.atividades.count() }} atividades</p>
+          <div class="actions">
+            <form action="{{ url_for('editar_curso', curso_id=curso.id) }}" method="GET" style="display:inline;">
+              <button class="boton-elegante" type="submit">Editar</button>
+            </form>
+            <form action="{{ url_for('ver_alunos', curso_id=curso.id) }}" method="GET" style="display:inline;">
+              <button class="boton-elegante" type="submit">Ver Alunos</button>
+            </form>
+          </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>Nenhum curso disponível.</p>
+        {% endif %}
+    </div>
+  </div>
+  <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+</body>
+</html>

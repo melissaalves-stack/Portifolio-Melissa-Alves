@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>{{ atividade.titulo }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<div class="questao-container">
+  <h1>{{ atividade.titulo }}</h1>
+  {% if atividade.data_entrega %}
+    <p>Entrega: {{ atividade.data_entrega.strftime('%d/%m/%Y') }}</p>
+  {% endif %}
+  {% if atividade.descricao %}
+    <p>{{ atividade.descricao }}</p>
+  {% endif %}
+
+  {% if ja_enviou %}
+    <div class="alert success">
+      Você já enviou esta atividade. Apenas uma submissão é permitida.
+    </div>
+  {% else %}
+    <form method="POST" action="{{ url_for('aluno_responder_atividade', atividade_id=atividade.id) }}">
+      {% for q in questoes %}
+        <div class="questao-card">
+          <p><strong>Questão {{ loop.index }}:</strong> {{ q.enunciado }}</p>
+          <div class="alternativas">
+            {% for letra, texto in [('A', q.alternativa_a), ('B', q.alternativa_b), ('C', q.alternativa_c), ('D', q.alternativa_d), ('E', q.alternativa_e)] %}
+              {% if texto %}
+                <label>
+                  <input type="radio" name="respostas[{{ q.id }}]" value="{{ letra }}" required>
+                  {{ letra|lower }}) {{ texto }}
+                </label><br>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      {% endfor %}
+      <button class="boton-elegante" type="submit">Enviar respostas</button>
+    </form>
+  {% endif %}
+</div>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aluno - EduConnect</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="sidebar">
+    <h1>EduConnect</h1>
+    <a href="#" class="active">Dashboard</a>
+    <a href="{{ url_for('cursos_aluno') }}">Cursos</a>
+    <a href="{{ url_for('certificados_aluno') }}">Certificados</a>
+    <a href="{{ url_for('logout') }}">Sair</a>
+  </div>
+
+  <div class="main-content">
+    <div class="header-com-botao">
+        <h1>{{ curso.titulo }} — Atividades</h1>
+        <a href="{{ url_for('aulas_aluno', curso_id=curso.id) }}" class="boton-elegante">Ver Aulas</a>
+    </div>
+
+    <dialog class="modal-janela" id="responderAtividadeModal">
+      <button class="boton-elegante" id="fecharModalAtividadeBtn">&times;</button>
+      <div id="atividadeConteudo">
+        <!-- O conteúdo da atividade será injetado aqui via JavaScript -->
+      </div>
+    </dialog>
+
+  <h1>{{ curso.titulo }} — Atividades</h1>
+
+  {% if atividades %}
+    <div class="cursos-grid">
+      {% for a in atividades %}
+        <div class="cursos-card">
+          <h3>{{ a.titulo }}</h3>
+          {% if a.tipo %}<span class="badge">{{ a.tipo }}</span>{% endif %}
+          {% if a.data_entrega %}
+            <p>Entrega: {{ a.data_entrega.strftime('%d/%m/%Y') }}</p>
+          {% endif %}
+          <p>{{ a.descricao }}</p>
+          <button 
+              class="boton-elegante abrirAtividade" 
+              data-url="{{ url_for('aluno_responder_atividade', atividade_id=a.id) }}"
+            >
+              Abrir/Responder
+            </button>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>Nenhuma atividade publicada.</p>
+  {% endif %}
+
+  <p><a href="{{ url_for('cursos_aluno') }}">Voltar</a></p>
+  </div>
+  <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+  <script>
+    const modal = document.getElementById('responderAtividadeModal');
+    const fecharBtn = document.getElementById('fecharModalAtividadeBtn');
+    const conteudo = document.getElementById('atividadeConteudo');
+
+    // Fecha o modal
+    fecharBtn.addEventListener('click', () => modal.close());
+
+    // Intercepta cliques nos botões "Abrir/Responder"
+    document.addEventListener('click', async (e) => {
+      const btn = e.target.closest('.abrirAtividade');
+      if (!btn) return;
+
+      const url = btn.dataset.url;
+
+      try {
+        const resp = await fetch(url, { headers: { 'X-Requested-With': 'XMLHttpRequest' }});
+        const html = await resp.text();
+        conteudo.innerHTML = html;
+        modal.showModal();
+      } catch (err) {
+        console.error('Erro ao carregar atividade:', err);
+        alert('Não foi possível carregar a atividade.');
+      }
+    });
+
+    // Intercepta o submit do formulário dentro do modal
+    conteudo.addEventListener('submit', async (e) => {
+      const form = e.target.closest('form');
+      if (!form) return;
+
+      e.preventDefault();
+
+      // Valida se todas as questões foram respondidas
+      const questoes = form.querySelectorAll('.questao-card');
+      let todasRespondidas = true;
+      
+      questoes.forEach(q => {
+        const radios = q.querySelectorAll('input[type="radio"]');
+        const algumMarcado = Array.from(radios).some(r => r.checked);
+        if (!algumMarcado) todasRespondidas = false;
+      });
+
+      if (!todasRespondidas) {
+        alert('Por favor, responda todas as questões antes de enviar.');
+        return;
+      }
+
+      const formData = new FormData(form);
+      const url = form.action;
+
+      try {
+        const resp = await fetch(url, {
+          method: 'POST',
+          body: formData,
+          headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        });
+
+        if (resp.ok) {
+          const html = await resp.text();
+          
+          // Mostra mensagem de sucesso no modal
+          conteudo.innerHTML = html;
+          
+          // Fecha o modal após 2 segundos e recarrega a página
+          setTimeout(() => {
+            modal.close();
+            location.reload(); // Recarrega para atualizar status das atividades
+          }, 2000);
+        } else {
+          alert('Erro ao enviar respostas. Tente novamente.');
+        }
+      } catch (err) {
+        console.error('Erro ao enviar:', err);
+        alert('Não foi possível enviar as respostas.');
+      }
+    });
+  </script>
+</body>
+</html>

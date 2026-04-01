@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professor - EduConnect</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="sidebar">
+    <h2>EduConnect</h2>
+    <a href="{{ url_for('painel_professor') }}" class="active">Home</a>
+    <a href="{{ url_for('cursos_professor') }}">Meus Cursos</a>
+    <a href="{{ url_for('logout') }}">Sair</a>
+  </div>
+
+  <div class="main-content">
+    <h1>Olá, Professor(a) {{ informacao.nome }}!</h1>
+    <button class="btn-primary" onclick="criarCurso()">+ Criar novo curso</button>
+
+    <h3>Meus Cursos</h3>
+    <div class="card">
+      Desenvolvimento Web — 120 alunos | Progresso médio: 65%
+      <div class="actions">
+        <button>Editar</button>
+        <button>Ver Alunos</button>
+      </div>
+    </div>
+    <div class="card">
+      Marketing Digital — 80 alunos | Progresso médio: 60%
+      <div class="actions">
+        <button>Editar</button>
+        <button>Ver Alunos</button>
+      </div>
+    </div>
+  </div>
+  <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+</body>
+</html>

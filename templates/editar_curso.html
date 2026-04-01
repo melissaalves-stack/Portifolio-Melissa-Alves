@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestor - EduConnect</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="sidebar">
+    <h2>EduConnect</h2>
+    <a href="#" class="active">Relatórios</a>
+    <a href="{{ url_for('cursos_gestor') }}">Cursos</a>
+    <a href="#">Usuários</a>
+    <a href="{{ url_for('logout') }}">Sair</a>
+  </div>
+
+  <div class="main-content">
+    <h1>{{ curso.titulo }}</h1>
+    <p>Data de criação: {{ curso.data_criacao }}</p>
+    <form action="{{ url_for('editar_curso', curso_id=curso.id) }}" method="POST">
+      <h2>Titulo:</h2>
+      <label for="titulo"></label>
+      <input type="text" id="titulo" name="titulo" value="{{ curso.titulo }}" required>
+
+      <h2>Descrição:</h2>
+      <label for="descricao"></label>
+      <textarea id="descricao" name="descricao" required>{{ curso.descricao }}</textarea>
+
+      <h2>Professor: {{ curso.professor.nome if curso.professor else 'sem professor' }}</h2>
+      <label for="professor_id"></label>
+      <input type="text" id="professor_id" name="professor_id" value="{{ curso.professor_id }}" required>
+
+      <button type="submit" class="btn-primary">Salvar alterações</button>
+    </form>
+    
+  </div>
+  <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aluno - EduConnect</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="sidebar">
+    <h2>EduConnect</h2>
+    <a href="#" class="active">Dashboard</a>
+    <a href="{{ url_for('cursos_aluno') }}">Cursos</a>
+    <a href="{{ url_for('certificados_aluno') }}">Certificados</a>
+    <a href="{{ url_for('logout') }}">Sair</a>
+  </div>
+
+  <div class="main-content">
+    <h1>Bem-vindo(a), {{ informacao.nome }}!</h1>
+    <h3>Seus cursos</h3>
+    <div class="card">Desenvolvimento Web – 65% concluído</div>
+    <div class="card">Marketing Digital – 30% concluído</div>
+  </div>
+  <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+</body>
+</html>
