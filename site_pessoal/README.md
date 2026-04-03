@@ -1,6 +1,6 @@
 # Melissa Alves 🌸
 
-> acesse: **[ITSMELDEV](https://melissaalves-stack.github.io)**
+> acesse: **[ITSMELDEV](https://portifolio-melissa-alves.vercel.app/)**
 
 ---
 
