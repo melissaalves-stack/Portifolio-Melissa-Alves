@@ -2,8 +2,6 @@
 
 Bem-vindo(a) ao repositório do meu portfólio pessoal. Este espaço foi criado para apresentar meus principais projetos, habilidades e um pouco da minha trajetória profissional.
 
-🌐 **[Acesse o meu site pessoal aqui](https://melissaalves-stack.github.io)**
-
 ## 📌 Sobre o Repositório
 
 Aqui você encontra os arquivos e recursos utilizados para construir a minha página pessoal. O objetivo deste projeto é centralizar meus trabalhos e facilitar o acesso a quem deseja conhecer mais sobre o que eu faço.
