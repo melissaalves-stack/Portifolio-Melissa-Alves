@@ -4,9 +4,10 @@ Bem-vindo(a) ao repositório do meu portfólio pessoal. Este espaço foi criado 
 
 ## 📌 Sobre o Repositório
 
-Aqui você encontra os arquivos e recursos utilizados para construir a minha página pessoal. O objetivo deste projeto é centralizar meus trabalhos e facilitar o acesso a quem deseja conhecer mais sobre o que eu faço.
+Aqui você encontra os projetos curtos que foram utilizados para construir a minha base de conhecimento.
 
-## 🛠️ O que você vai encontrar no site:
+## 🛠️ O que você vai encontrar no site pessoal:
+Acesse aqui o meu site pessoal: [SITE PESSOAL - MELISSA ALVES](https://portifolio-melissa-alves.vercel.app)
 
 * **Projetos de Destaque:** Um resumo dos meus melhores trabalhos.
 * **Minhas Habilidades:** Ferramentas e tecnologias com as quais tenho experiência.
