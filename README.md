@@ -1,6 +1,6 @@
 # Meu Portfólio 📂
 
-Bem-vindo(a) ao repositório do meu portfólio pessoal. Este espaço foi criado para apresentar meus principais projetos, habilidades e um pouco da minha trajetória profissional.
+Bem-vindo(a) ao repositório do meu portfólio pessoal. Este espaço foi criado para apresentar meus projetos menores, habilidades e um pouco da minha trajetória de aprendizado.
 
 ## 📌 Sobre o Repositório
 
