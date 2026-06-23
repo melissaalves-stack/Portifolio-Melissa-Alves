@@ -1,0 +1,45 @@
+/* =============================================================================
+   UNIVERSIDADE FEDERAL DE ALFENAS - UNIFAL-MG
+   DISCIPLINA: PROGRAMAÇÃO LÓGICA
+   GUIA COMPLETO DE ESTUDOS DO SEMESTRE
+   =============================================================================
+   
+   PARTE 1: REVISÃO TEÓRICA DO SEMESTRE (A LÓGICA POR TRÁS DO PROLOG)
+   -----------------------------------------------------------------------------
+   1. O Paradigma Declarativo:
+      Em Prolog, você não diz ao computador COMO fazer (passo a passo de loops).
+      Você diz o que É VERDADE (Fatos e Regras) e o sistema descobre a resposta.
+      - Fato: declaração absoluta. Ex: homem(joao).
+      - Regra: condicional (se).  Ex: mortal(X) :- homem(X). (Lê-se: X é mortal SE X é homem)
+
+   2. Átomos vs Variáveis:
+      - Átomos (Constantes): Começam com letra MINÚSCULA. Ex: lsort, a, b, azul.
+      - Variáveis (Espaços vazios): Começam com letra MAIÚSCULA ou '_'. Ex: Lista, X, Total.
+
+   3. Operadores de Igualdade e Matemática (A Maior Pegadinha!):
+      - '='   : Unificação. Não faz conta! Apenas casa os lados. Ex: X = 1 + 2 resulta em X = 1 + 2.
+      - 'is'  : Avaliação Aritmética. Resolve a conta da direita. Ex: X is 1 + 2 resulta em X = 3.
+      - '=:=' : Comparador matemático. Ex: 2 + 2 =:= 3 + 1 resulta em true.
+      - '=\=' : Diferencial matemático (diferente).
+      - '=\=' vs '\=' : \= é falha de unificação sintática, =\= é diferença numérica.
+
+   4. Operadores de Comparação Numérica:
+      - Maior: >    | Menor: < 
+      - Maior ou igual: >=
+      - Menor ou igual: =<  <-- ATENÇÃO! É '=<' e NÃO '<='. Se errar isso, o código quebra.
+
+   5. Manipulação de Listas [Cabeça | Cauda]:
+      Toda lista não-vazia pode ser dividida pelo operador barra vertical '|'.
+      - Cabeça (Head): O primeiro elemento puro da lista.
+      - Cauda (Tail): Uma LISTA contendo todo o resto do conteúdo.
+      Ex: Se Lista = [a, b, c], então [H|T] = Lista resulta em: H = a e T = [b, c].
+      Se Lista = [a], então [H|T] = Lista resulta em: H = a e T = [].
+      O símbolo '_' (underscore) serve para ignorar uma parte. Ex: [_|T] ignora a Cabeça.
+
+   6. Pensamento Recursivo:
+      Como não existem laços (for/while), usamos funções que chamam a si mesmas.
+      Toda recursão precisa de:
+      - Um Caso Base (Parada): Geralmente lida com a lista vazia '[]'.
+      - Um Passo Recursivo: Pega a Cauda, chama a si mesmo e acumula o resultado no final.
+revisao.txt
+Exibindo revisao.txt.
